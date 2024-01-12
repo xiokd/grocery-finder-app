@@ -10,6 +10,18 @@ import StoreMap from './pages/StoreMap';
 import Products from './pages/Products';
 import List from './pages/List';
 import Comparison from './pages/Comparison';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#607D8B',
+    },
+    secondary: {
+      main: '#ffffff',
+    },
+  },
+});
 
 const router = createBrowserRouter([
   {
@@ -36,6 +48,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>,
 )
