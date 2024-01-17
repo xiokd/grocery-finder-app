@@ -23,6 +23,11 @@ function Location() {
     setDistance(event.target.value);
   };
 
+  // Test console log for button component
+  const locationSearchTest = () => {
+    console.log("Search Button Clicked!");
+  }
+
   return (
     <div>
       <NavBar />
@@ -83,7 +88,7 @@ function Location() {
               </Box>
             </Grid>
             <Grid item>
-              <IconButton color="primary">
+              <IconButton color="primary" onClick={locationSearchTest}>
                 <SearchIcon />
               </IconButton>
             </Grid>
