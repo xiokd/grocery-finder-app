@@ -2,7 +2,6 @@ import React from "react";
 import "../index.css";
 import {
   Box,
-  Button,
   Grid,
   InputLabel,
   MenuItem,
@@ -17,16 +16,25 @@ import NavBar from "../components/NavBar";
 import logo from "../images/logo.png";
 
 function Location() {
+  // Related to Distance Dropdown component
   const [distance, setDistance] = React.useState("");
 
+  // Handle data change and updates the Distance Dropdown's view
   const handleChange = (event) => {
     setDistance(event.target.value);
   };
 
-  // Test console log for button component
+  // Simple test console log for button component
   const locationSearchTest = () => {
     console.log("Search Button Clicked!");
-  }
+  };
+
+  /*
+  Tasks:
+  - TextField component should be switched to MUI Autocomplete component.
+  - Dropdown menu allows user to select a Distance Value represented by a number.
+  - After the user presses the IconButton, both Location and Distance value are used with Google Maps API to update the Map View.
+  */
 
   return (
     <div>

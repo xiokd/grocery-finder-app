@@ -1,6 +1,10 @@
 import React from "react";
 import "../index.css";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { 
+  APIProvider, 
+  Map,
+} from "@vis.gl/react-google-maps";
+
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
 

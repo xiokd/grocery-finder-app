@@ -1,4 +1,10 @@
-import { Box, Card, CardContent, Typography, CardMedia } from "@mui/material";
+import { 
+  Box, 
+  Card, 
+  CardContent, 
+  Typography, 
+  CardMedia,
+} from "@mui/material";
 
 import placeholder from "../images/placeholder/placeholderstore.png";
 
