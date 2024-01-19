@@ -3,11 +3,13 @@ import "../index.css";
 import { Box, Avatar, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
+// Temporary: Imports for placeholder images
 import placeholdermilk from "../images/placeholder/placeholdermilk.png";
 import placeholdercoffee from "../images/placeholder/placeholdercoffee.png";
 import placeholdercereal from "../images/placeholder/placeholdercereal.png";
 import placeholderbread from "../images/placeholder/placeholderbread.png";
 
+// Sets Column values and labels for the Data Grid component 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -39,6 +41,7 @@ const columns = [
   },
 ];
 
+// Temporary: Placeholder data that currently occupies the data grid
 const rows = [
   {
     id: 1,
@@ -69,6 +72,16 @@ const rows = [
     price: 16.9,
   },
 ];
+
+/*
+Tasks:
+- The Data Grid component will display: ID, Product Image, Product Name, Store Name, and Price as column values.
+- The Search Bar input should be able to search for products that appear in the Data Grid.
+- List items can be selected with the checkbox selection.
+    - Selected items can be deleted using the "Delete" button that appears on the bottom of the view.
+    - It is possible to make Button component disabled. If this is the case, upon selection it should be enabled.
+- Current static placeholder data will be replaced with data that appears in the database.
+*/
 
 function ProductGrid() {
   return (

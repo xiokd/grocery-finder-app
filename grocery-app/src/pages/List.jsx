@@ -12,6 +12,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import NavBar from "../components/NavBar";
 import ProductGrid from "../components/ProductGrid";
 
+
+// TextField will need to be replaced with Autocomplete component from MUI
 function List() {
   return (
     <div>
