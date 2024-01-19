@@ -16,6 +16,25 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.list-button-section {
+  padding-top: 5px;
+  display: flex;
+  justify-content: right;
+}
+
+.list-grid-content {
+  display: flex;
+  justify-content: center;  
+}
+
+.list-title-container {
+  padding: 1rem;
+}
+
+.list-title-search-section {
+  padding-top: 5px;
+}
+
 .map-container {
   margin-right: 0.25rem;
   margin-top: 0.5rem;
