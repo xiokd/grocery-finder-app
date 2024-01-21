@@ -13,6 +13,7 @@ This project focuses on creating a method to locate the cheapest grocery product
 - [VSCode](https://code.visualstudio.com/)
 - [Docker](https://www.docker.com/)
 - [pgAdmin](https://www.pgadmin.org/)
+- [Insomnia](https://insomnia.rest/)
 ### Other Libraries/Frameworks:
 - [Google Maps](https://developers.google.com/maps/documentation/javascript/libraries-open-source)
 - [React Router](https://reactrouter.com/en/main)
