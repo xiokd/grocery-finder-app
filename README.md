@@ -1,6 +1,8 @@
 # Grocery Finder App
 This project focuses on creating a method to locate the cheapest grocery products between multiple stores based on user given location and distance inputs.
 
+![Preview](https://github.com/xiokd/grocery-finder-app/blob/main/Preview.png)
+
 ## References
 ### Build Tool:
 - [Vite](https://vitejs.dev/)
