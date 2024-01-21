@@ -8,7 +8,12 @@ const pool = require('./db');
 app.use(cors());
 app.use(express.json());
 
-// Routes and SQL Queries
+/*
+Routes and Requests:
+- GET/POST requests go here
+- Using the pool from the db.js file, it can communicate with the PostgreSQL database using SQL queries
+- Routes can be accessed through localhost and appending the route at the end: http://localhost:5555/
+*/
 
 // GET Request: Return all the rows from the Products table
 app.get("/product" , async (req,res) => {
@@ -20,9 +25,13 @@ app.get("/product" , async (req,res) => {
     }
 });
 
-// Basic GET request test 
+/*
+End of Routes and Requests
+*/
+
+// Simple GET request test using root '/' as a route
 app.get('/' , (req,res) => { 
-    res.send('Test Request'); 
+    res.send('Test Request: Success!'); 
 });
   
 // Server Setup 
