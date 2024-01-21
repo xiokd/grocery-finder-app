@@ -10,6 +10,16 @@ app.use(express.json());
 
 // Routes and SQL Queries
 
+// GET Request: Return all the rows from the Products table
+app.get("/product" , async (req,res) => {
+    try {
+        const allProduct = await pool.query("SELECT * FROM product");
+        res.json(allProduct.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 // Basic GET request test 
 app.get('/' , (req,res) => { 
     res.send('Test Request'); 
