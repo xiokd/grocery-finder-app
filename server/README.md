@@ -9,7 +9,7 @@ npm install
 ```
 Ensure the nodemon tool is installed and run the server file:
 ```
-nodemon ./index.js
+nodemon ./server.js
 ```
 
 ## References:
