@@ -21,3 +21,5 @@ This project focuses on creating a method to locate the cheapest grocery product
 - [React Router](https://reactrouter.com/en/main)
 - [Material UI Components](https://mui.com/material-ui/all-components/)
 - [Material UI Icons](https://mui.com/material-ui/icons/)
+### Other Resources:
+- [Uxwing](https://uxwing.com/)
