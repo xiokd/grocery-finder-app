@@ -25,6 +25,30 @@ app.get("/product" , async (req,res) => {
     }
 });
 
+// GET Request: Returns product based on upc (Primary Key) parameter
+app.get("/product/product_name/:upc" , async (req,res) => {
+    try {
+        const { upc } = req.params;
+        const allProduct = await pool.query("SELECT product_name FROM product where upc = $1", [upc]);
+        res.json(allProduct.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+// GET Request: Returns product based on brand AND product_name
+app.get("/product/:brand/:name" , async (req,res) => {
+    try {
+        const brand = req.params.brand;
+        const name = req.params.name;
+
+        const allProduct = await pool.query("SELECT * FROM product where brand = $1 and product_name = $2", [brand, name]);
+        res.json(allProduct.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
 /*
 End of Routes and Requests
 */
