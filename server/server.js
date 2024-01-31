@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port_no = 5555
+const port_no = 5555;
 const cors = require('cors');
 const pool = require('./db');
 
@@ -48,11 +48,11 @@ app.get("/get/Store", async (req, res) => { // http://localhost:5555/getStore
         }
 });
 //get a store <--help needed
-app.get("/get/Store/:id", async (req, res) => { //http://localhost:5555/getStore/{id}
+app.get("/get/Store/:store_name", async (req, res) => { //http://localhost:5555/getStore/{id}
     try{
-        const result = await pool.query("SELECT store_name FROM store WHERE zip = $1", [req.params.zip]);
+        const result = await pool.query("SELECT * FROM store WHERE store_name = $1", [params.body.store_name]);
         console.log(result);
-        console.log(req.params);
+        console.log(store_name);
         res.status(200).json({
             status: 200,
             data:{
@@ -108,9 +108,9 @@ app.delete("/delete/Store/:id", async(req, res) =>{
     }
 });
 //get specific item
-app.get("/get/Store/item/:id", async (req, res) => {
+app.get("/get/Store/item/product_type", async (req, res) => {
     try{
-        const result = await pool.query("SELECT item_type, item_name, price, weight FROM store WHERE item_type = $1", [req.params.item_type]);
+        const result = await pool.query("SELECT * FROM store WHERE product_type = $1", [req.params.product_type]);
         //console.log(result);
         console.log(req.params);
         res.status(200).json({
