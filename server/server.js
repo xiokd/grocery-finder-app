@@ -32,7 +32,7 @@ End of Routes and Requests
 // SQL Queries
 
 //get all stores
-app.get("/get/Store", async (req, res) => { // http://localhost:5555/getStore
+app.get("/groceryApp/store/item", async (req, res) => { // http://localhost:5555/getStore
    try{
         const result = await pool.query("select * from store;");
         console.log(result);
@@ -47,10 +47,11 @@ app.get("/get/Store", async (req, res) => { // http://localhost:5555/getStore
         console.log(err)
         }
 });
-//get a store <--help needed
-app.get("/get/Store/:store_name", async (req, res) => { //http://localhost:5555/getStore/{id}
+//get a stores by name (Safeway or Yokes)
+app.get("/groceryApp/store/item/:store_name", async (req, res) => { //http://localhost:5555/
     try{
-        const result = await pool.query("SELECT * FROM store WHERE store_name = $1", [params.body.store_name]);
+        const {store_name} = req.params;
+        const result = await pool.query("SELECT zip, city, address, store_name FROM store WHERE store_name = $1", [store_name]);
         console.log(result);
         console.log(store_name);
         res.status(200).json({
@@ -64,7 +65,7 @@ app.get("/get/Store/:store_name", async (req, res) => { //http://localhost:5555/
     }
 });
 //create a new store entry with product
-app.post("/create/Store", async (req, res) => {
+app.post("/groceryApp/store/item", async (req, res) => {
     try{
         const result = await pool.query("INSERT INTO store (zip, city, address, store_name, product_name, product_discription, product_type, product_weight, product_price, package_quantity, product_upc, product_url) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)",
          [req.body.zip, req.body.city, req.body.address, req.body.store_name, req.body.product_name, req.body.product_discription, req.body.product_type, req.body.product_weight, req.body.product_price, req.body.package_quantity, req.body.product_upc, req.body.product_url]);
@@ -81,8 +82,8 @@ app.post("/create/Store", async (req, res) => {
         console.log(err);
     }
 });
-//update a product and (store <--will fix later with a separate table)
-app.put("/update/Store/item/:product_upc", async (req, res) =>{
+//update a store and item
+app.put("/groceryApp/store/item/:product_upc", async (req, res) =>{
     try{
         const result = await pool.query("UPDATE store SET product_name = $1, product_discription = $2, product_type = $3, product_weight = $4, product_price = $5, package_quantity = $6, product_url = $7 where product_upc = $8 returning *",
          [req.body.product_name, req.body.product_discription, req.body.product_type, req.body.product_weight, req.body.product_price, req.body.package_quantity, req.body.product_url,  req.params.product_upc]);
@@ -101,9 +102,10 @@ app.put("/update/Store/item/:product_upc", async (req, res) =>{
     }
 });
 //delete a store
-app.delete("/delete/Store/byItem/:product_upc", async(req, res) =>{
+app.delete("/groceryApp/store/item/:address", async(req, res) =>{
     try{
-        const result = await pool.query("DELETE FROM store where product_upc = $1", [req.params.product_upc]);
+        const {address} = req.params;
+        const result = await pool.query("DELETE FROM store where address = $1", [address]);
         res.status(204).json({
             status: "deleted",
         });
@@ -111,11 +113,11 @@ app.delete("/delete/Store/byItem/:product_upc", async(req, res) =>{
         console.log(err)
     }
 });
-//get items by description
-app.get("/get/Store/item/product_discription", async (req, res) => {
+//get items by product_type
+app.get("/groceryApp/store/item/product/:product_type", async (req, res) => {
     try{
-        //const product = req.params;
-        const result = await pool.query("SELECT DISTINCT product_discription FROM store");
+        const {product_type} = req.params;
+        const result = await pool.query("SELECT product_discription, product_weight, product_price, package_quantity, product_upc, product_url FROM store WHERE product_type = $1", [product_type]);
         console.log(result);
         res.json(result.rows);
         /*res.status(200).json({
@@ -128,7 +130,7 @@ app.get("/get/Store/item/product_discription", async (req, res) => {
         console.log(err)
     }
 });
-app.get("/get/Store/upc/:product_upc", async (req, res) => {
+app.get("/groceryApp/store/item/:product_upc", async (req, res) => {
     try {
         const { product_upc } = req.params;
         const allProduct = await pool.query("SELECT product_name, product_discription, product_type, product_weight, product_price FROM store where product_upc = $1", [product_upc]);
