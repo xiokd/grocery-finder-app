@@ -13,6 +13,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 
 import NavBar from "../components/NavBar";
+import PlacesAutocomplete from "../components/PlacesAutocomplete";
 import logo from "../images/logo.png";
 
 function Location() {
@@ -63,13 +64,9 @@ function Location() {
             justifyContent="center"
           >
             <Grid item>
-              <Box sx={{ minWidth: 300 }}>
+            <Box sx={{ minWidth: 300 }}>
                 <FormControl fullWidth>
-                  <TextField
-                    label="Address/Location"
-                    variant="outlined"
-                    size="small"
-                  />
+                  <PlacesAutocomplete />
                 </FormControl>
               </Box>
             </Grid>
