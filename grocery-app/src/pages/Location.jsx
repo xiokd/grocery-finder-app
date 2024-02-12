@@ -25,10 +25,19 @@ function Location() {
     setDistance(event.target.value);
   };
 
+  // Simple test console log for retrieving distance value
+  const distanceValueTest = () => {
+    console.log("Distance: " + mapLocation.distance);
+  }
+
   // Simple test console log for button component
   const locationSearchTest = () => {
     console.log("Search Button Clicked!");
   };
+
+  const mapLocation = {
+    distance: distance,
+  }
 
   /*
   Tasks:
@@ -93,7 +102,7 @@ function Location() {
               </Box>
             </Grid>
             <Grid item>
-              <IconButton color="primary" onClick={locationSearchTest}>
+              <IconButton color="primary" onClick={distanceValueTest}>
                 <SearchIcon />
               </IconButton>
             </Grid>
