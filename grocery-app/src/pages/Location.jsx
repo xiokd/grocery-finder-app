@@ -13,20 +13,41 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 
 import NavBar from "../components/NavBar";
+import PlacesAutocomplete from "../components/PlacesAutocomplete";
 import logo from "../images/logo.png";
 
 function Location() {
-  // Related to Distance Dropdown component
+  // Address/Location and Distance React Hooks
+  const [location, setLocation] = React.useState("");
   const [distance, setDistance] = React.useState("");
 
   // Handle data change and updates the Distance Dropdown's view
-  const handleChange = (event) => {
+  const handleDistanceChange = (event) => {
     setDistance(event.target.value);
   };
 
-  // Simple test console log for button component
-  const locationSearchTest = () => {
-    console.log("Search Button Clicked!");
+  // Simple test console log for both Location and Distance values
+  const valueTest = () => {
+    if (!mapLocation.distance && !mapLocation.location) {
+      console.log("Address/Location and Distance values are empty!");
+    } else if (mapLocation.distance && !mapLocation.location) {
+      console.log("Location value is empty!");
+    } else if (!mapLocation.distance && mapLocation.location) {
+      console.log("Address/Location value is empty!");
+    } else {
+      console.log(
+        "Location: " +
+          mapLocation.location +
+          "\nDistance: " +
+          mapLocation.distance
+      );
+    }
+  };
+
+  // Initializes mapLocation object with attributes that can be modified
+  const mapLocation = {
+    distance: distance,
+    location: location,
   };
 
   /*
@@ -65,10 +86,8 @@ function Location() {
             <Grid item>
               <Box sx={{ minWidth: 300 }}>
                 <FormControl fullWidth>
-                  <TextField
-                    label="Address/Location"
-                    variant="outlined"
-                    size="small"
+                  <PlacesAutocomplete
+                    changeLocationValue={(location) => setLocation(location)}
                   />
                 </FormControl>
               </Box>
@@ -82,7 +101,7 @@ function Location() {
                     id="distance-select"
                     value={distance}
                     label="Distance"
-                    onChange={handleChange}
+                    onChange={handleDistanceChange}
                   >
                     <MenuItem value={1}>1 mi</MenuItem>
                     <MenuItem value={2}>2 mi</MenuItem>
@@ -96,7 +115,7 @@ function Location() {
               </Box>
             </Grid>
             <Grid item>
-              <IconButton color="primary" onClick={locationSearchTest}>
+              <IconButton color="primary" onClick={valueTest}>
                 <SearchIcon />
               </IconButton>
             </Grid>
