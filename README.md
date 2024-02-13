@@ -1,6 +1,8 @@
 # Grocery Finder App
 This project focuses on creating a method to locate the cheapest grocery products between multiple stores based on user given location and distance inputs.
 
+![Preview](https://github.com/xiokd/grocery-finder-app/blob/main/Preview.png)
+
 ## References
 ### Build Tool:
 - [Vite](https://vitejs.dev/)
@@ -13,8 +15,12 @@ This project focuses on creating a method to locate the cheapest grocery product
 - [VSCode](https://code.visualstudio.com/)
 - [Docker](https://www.docker.com/)
 - [pgAdmin](https://www.pgadmin.org/)
+- [Insomnia](https://insomnia.rest/)
+- [Postman](https://www.postman.com/)
 ### Other Libraries/Frameworks:
 - [Google Maps](https://developers.google.com/maps/documentation/javascript/libraries-open-source)
 - [React Router](https://reactrouter.com/en/main)
 - [Material UI Components](https://mui.com/material-ui/all-components/)
 - [Material UI Icons](https://mui.com/material-ui/icons/)
+### Other Resources:
+- [Uxwing](https://uxwing.com/)
