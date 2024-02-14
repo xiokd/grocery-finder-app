@@ -59,7 +59,7 @@ function StoreMap() {
         <div>
             <NavBar />
             <div className="map-page-container">
-                <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+                <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
                     <div className="map-container">
                         <Map zoom={15} center={position}></Map>
                     </div>
