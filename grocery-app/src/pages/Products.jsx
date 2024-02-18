@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "../index.css";
 //api to access index.js
 import ItemsApi from "../apis/ItemsApi";
+import ProductStoreGrid from "../components/ProductStoreGrid";
 
 import NavBar from "../components/NavBar";
 
@@ -26,7 +27,7 @@ function Products() {
     <div>
       <div>
         <NavBar/>
-        Products
+        <ProductStoreGrid/>
       </div>
     </div>
   );
