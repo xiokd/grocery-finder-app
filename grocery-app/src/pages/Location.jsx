@@ -21,10 +21,29 @@ function Location() {
   const [location, setLocation] = React.useState("");
   const [distance, setDistance] = React.useState("");
 
+  // Field Validation
+  const [locationError, setLocationError] = React.useState(false);
+  const [distanceError, setDistanceError] = React.useState(false);
+
   // Handle data change and updates the Distance Dropdown's view
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
   };
+
+  // Validate fields
+  const validateFields = () => {
+    if (!mapLocation.distance) {
+      setDistanceError(true);
+    }
+
+    if (!mapLocation.location) {
+      setLocationError(true);
+    }
+
+    // Do something
+  };
+
+  /*
 
   // Simple test console log for both Location and Distance values
   const valueTest = () => {
@@ -43,6 +62,8 @@ function Location() {
       );
     }
   };
+
+  */
 
   // Initializes mapLocation object with attributes that can be modified
   const mapLocation = {
@@ -88,6 +109,7 @@ function Location() {
                 <FormControl fullWidth>
                   <PlacesAutocomplete
                     changeLocationValue={(location) => setLocation(location)}
+                    changeDistanceError={locationError}
                   />
                 </FormControl>
               </Box>
@@ -102,6 +124,7 @@ function Location() {
                     value={distance}
                     label="Distance"
                     onChange={handleDistanceChange}
+                    error={distanceError}
                   >
                     <MenuItem value={1}>1 mi</MenuItem>
                     <MenuItem value={2}>2 mi</MenuItem>
@@ -115,7 +138,7 @@ function Location() {
               </Box>
             </Grid>
             <Grid item>
-              <IconButton color="primary" onClick={valueTest}>
+              <IconButton color="primary" onClick={validateFields}>
                 <SearchIcon />
               </IconButton>
             </Grid>
