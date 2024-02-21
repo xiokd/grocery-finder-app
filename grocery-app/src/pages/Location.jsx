@@ -1,14 +1,15 @@
 import React from "react";
 import "../index.css";
 import {
+  Alert,
   Box,
   Grid,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   FormControl,
   IconButton,
+  Snackbar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -25,6 +26,16 @@ function Location() {
   const [locationError, setLocationError] = React.useState(false);
   const [distanceError, setDistanceError] = React.useState(false);
 
+  // Alert
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleClose = (event, reason) => {
+    if(reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
   // Handle data change and updates the Distance Dropdown's view
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
@@ -34,13 +45,16 @@ function Location() {
   const validateFields = () => {
     if (!mapLocation.distance) {
       setDistanceError(true);
+      setOpenAlert(true);
     }
 
     if (!mapLocation.location) {
       setLocationError(true);
+      setOpenAlert(true);
     }
 
     // Do something
+    // Write code here
   };
 
   /*
@@ -145,6 +159,15 @@ function Location() {
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Please fill in all fields
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
