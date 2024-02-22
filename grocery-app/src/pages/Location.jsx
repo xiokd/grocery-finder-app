@@ -1,14 +1,15 @@
 import React from "react";
 import "../index.css";
 import {
+  Alert,
   Box,
   Grid,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   FormControl,
   IconButton,
+  Snackbar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -21,10 +22,42 @@ function Location() {
   const [location, setLocation] = React.useState("");
   const [distance, setDistance] = React.useState("");
 
+  // Field Validation
+  const [locationError, setLocationError] = React.useState(false);
+  const [distanceError, setDistanceError] = React.useState(false);
+
+  // Alert
+  const [openAlert, setOpenAlert] = React.useState(false);
+  const handleClose = (event, reason) => {
+    if(reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
   // Handle data change and updates the Distance Dropdown's view
   const handleDistanceChange = (event) => {
     setDistance(event.target.value);
   };
+
+  // Validate fields
+  const validateFields = () => {
+    if (!mapLocation.distance) {
+      setDistanceError(true);
+      setOpenAlert(true);
+    }
+
+    if (!mapLocation.location) {
+      setLocationError(true);
+      setOpenAlert(true);
+    }
+
+    // Do something
+    // Write code here
+  };
+
+  /*
 
   // Simple test console log for both Location and Distance values
   const valueTest = () => {
@@ -43,6 +76,8 @@ function Location() {
       );
     }
   };
+
+  */
 
   // Initializes mapLocation object with attributes that can be modified
   const mapLocation = {
@@ -88,6 +123,7 @@ function Location() {
                 <FormControl fullWidth>
                   <PlacesAutocomplete
                     changeLocationValue={(location) => setLocation(location)}
+                    changeDistanceError={locationError}
                   />
                 </FormControl>
               </Box>
@@ -102,6 +138,7 @@ function Location() {
                     value={distance}
                     label="Distance"
                     onChange={handleDistanceChange}
+                    error={distanceError}
                   >
                     <MenuItem value={1}>1 mi</MenuItem>
                     <MenuItem value={2}>2 mi</MenuItem>
@@ -115,13 +152,22 @@ function Location() {
               </Box>
             </Grid>
             <Grid item>
-              <IconButton color="primary" onClick={valueTest}>
+              <IconButton color="primary" onClick={validateFields}>
                 <SearchIcon />
               </IconButton>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+      <Snackbar
+        open={openAlert}
+        autoHideDuration={2000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error">
+          Please fill in all fields
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
