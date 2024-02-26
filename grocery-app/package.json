@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.4",
     "@mui/x-data-grid": "^6.19.1",
     "@vis.gl/react-google-maps": "^0.4.2",
+    "autosuggest-highlight": "^3.3.4",
     "axios": "^1.6.7",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
@@ -33,6 +34,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "vite": "^5.0.8"
+    "vite": "^5.1.3"
   }
 }

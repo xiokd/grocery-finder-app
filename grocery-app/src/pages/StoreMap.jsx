@@ -1,67 +1,52 @@
-import React, { useEffect } from "react";
-import "../index.css";
+import React from "react";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
-
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
+import ParentComponent from './ParentComponent'; // Import ParentComponent
 
-function StoreMap() {
+function StoreMap({ location, distance }) { // Receive location and distance as props
     const position = { lat: 47.487389, lng: -117.575762 };
+    const [mapView, setMapView] = useState({ center: position, zoom: 15 }); // Initial map view
 
     useEffect(() => {
-        const initializeMap = () => {
-
-            var script = document.createElement('script');
-            script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCqMmqDBbJcNMusOz-7xBlYXkrr57k9Yv8&libraries=geometry&callback=initializeMap';
-            script.defer = true;
-            document.head.appendChild(script);
-        };
-
-        const calculateDistance = () => {
-            const enteredAddress = document.getElementById('addressInput').value;
-
-            if (!enteredAddress) {
-                console.error('Please enter an address.');
-                return;
-            }
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const userLatLng = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-
-                    const geocoder = new window.google.maps.Geocoder();
-                    geocoder.geocode({ 'address': enteredAddress }, function(results, status) {
-                        if (status === 'OK') {
-                            const destination = results[0].geometry.location;
-
-                            const distance = window.google.maps.geometry.spherical.computeDistanceBetween(userLatLng, destination);
-                            const distanceKm = distance / 1000; // Convert meters to kilometers
-
-                            console.log('Distance: ' + distanceKm.toFixed(2) + ' km');
-                        } else {
-                            console.error('Geocode was not successful for the following reason: ' + status);
-                        }
-                    });
-                });
+        // Function to update map view based on location and distance
+        const updateMapView = () => {
+            // Check if location is valid
+            if (location.lat !== null && location.lng !== null) {
+                // Set the center of the map to the specified location
+                const newCenter = { lat: location.lat, lng: location.lng };
+                // Set the zoom level based on the distance value
+                let newZoom = 15; // Default zoom level
+                if (distance === 2) {
+                    newZoom = 12;
+                } else if (distance === 3) {
+                    newZoom = 10;
+                } else if (distance === 5) {
+                    newZoom = 8;
+                } // Adjust zoom level based on other distance values as needed
+                // Update map view with new center and zoom level
+                setMapView({ center: newCenter, zoom: newZoom });
             } else {
-                console.error("Geolocation is not supported by this browser.");
+                console.error("Invalid location");
             }
         };
 
+        updateMapView(); // Call the function initially and whenever location or distance changes
+    }, [location, distance]);
 
-        initializeMap(); // Call the initialization function when component mounts
-    }, []);
+    // Handle click event of search icon
+    const handleSearch = () => {
+        // Call updateMapView function when the user clicks the search icon
+        updateMapView();
+    };
 
     return (
         <div>
             <NavBar />
             <div className="map-page-container">
-                <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+                <APIProvider apiKey="AIzaSyCqMmqDBbJcNMusOz-7xBlYXkrr57k9Yv8">
                     <div className="map-container">
-                        <Map zoom={15} center={position}></Map>
+                        <Map zoom={mapView.zoom} center={mapView.center}></Map>
                     </div>
                 </APIProvider>
                 <div className="store-container no-scrollbar">
@@ -76,6 +61,7 @@ function StoreMap() {
                     </div>
                 </div>
             </div>
+            <ParentComponent /> {/* Render ParentComponent */}
         </div>
     );
 }
