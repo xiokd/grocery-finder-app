@@ -4,6 +4,8 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
+import ParentComponent from './ParentComponent'; // Import ParentComponent
+import { useState, useEffect } from "react";
 
 function StoreMap({ location, distance, onSearch }) {
     const position = { lat: 47.487389, lng: -117.575762 };
