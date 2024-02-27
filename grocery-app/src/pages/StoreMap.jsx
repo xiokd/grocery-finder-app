@@ -4,36 +4,43 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
-import ParentComponent from './ParentComponent'; // Import ParentComponent
-import { useState, useEffect } from "react";
 
-function StoreMap({ location, distance, onSearch }) {
+function StoreMap() {
     const position = { lat: 47.487389, lng: -117.575762 };
-    const [mapView, setMapView] = useState({ center: position, zoom: 15 });
+    const [location, setLocation] = useState({ lat: null, lng: null });
+    const [distance, setDistance] = useState(1); // Default distance value
+    const [mapView, setMapView] = useState({ center: position, zoom: 15 }); // Initial map view
 
     useEffect(() => {
+        // Function to update map view based on location and distance
         const updateMapView = () => {
-            if (location && location.lat !== null && location.lng !== null) {
+            // Check if location is valid
+            if (location.lat !== null && location.lng !== null) {
+                // Set the center of the map to the specified location
                 const newCenter = { lat: location.lat, lng: location.lng };
-                let newZoom = 15;
+                // Set the zoom level based on the distance value
+                let newZoom = 15; // Default zoom level
                 if (distance === 2) {
                     newZoom = 12;
                 } else if (distance === 3) {
                     newZoom = 10;
                 } else if (distance === 5) {
                     newZoom = 8;
-                }
+                } // Adjust zoom level based on other distance values as needed
+                // Update map view with new center and zoom level
                 setMapView({ center: newCenter, zoom: newZoom });
             } else {
                 console.error("Invalid location");
             }
         };
 
-        updateMapView();
+        updateMapView(); // Call the function initially and whenever location or distance changes
     }, [location, distance]);
 
+    // Handle click event of search icon
     const handleSearch = () => {
-        onSearch(location, distance);
+        // Call updateMapView function when the user clicks the search icon
+        updateMapView();
     };
 
     return (
