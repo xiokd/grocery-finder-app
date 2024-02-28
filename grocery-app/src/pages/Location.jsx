@@ -11,6 +11,7 @@ import {
   IconButton,
   Snackbar,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 
 import NavBar from "../components/NavBar";
@@ -18,6 +19,9 @@ import PlacesAutocomplete from "../components/PlacesAutocomplete";
 import logo from "../images/logo.png";
 
 function Location() {
+  // Navigate
+  const navigate = useNavigate();
+
   // Address/Location and Distance React Hooks
   const [location, setLocation] = React.useState("");
   const [distance, setDistance] = React.useState("");
@@ -43,41 +47,20 @@ function Location() {
 
   // Validate fields
   const validateFields = () => {
-    if (!mapLocation.distance) {
+    if(!mapLocation.location && !mapLocation.distance) {
+      setLocationError(true);
       setDistanceError(true);
       setOpenAlert(true);
-    }
-
-    if (!mapLocation.location) {
+    } else if(!mapLocation.location) {
       setLocationError(true);
       setOpenAlert(true);
-    }
-
-    // Do something
-    // Write code here
-  };
-
-  /*
-
-  // Simple test console log for both Location and Distance values
-  const valueTest = () => {
-    if (!mapLocation.distance && !mapLocation.location) {
-      console.log("Address/Location and Distance values are empty!");
-    } else if (mapLocation.distance && !mapLocation.location) {
-      console.log("Location value is empty!");
-    } else if (!mapLocation.distance && mapLocation.location) {
-      console.log("Address/Location value is empty!");
+    } else if(!mapLocation.distance) {
+      setDistanceError(true);
+      setOpenAlert(true);
     } else {
-      console.log(
-        "Location: " +
-          mapLocation.location +
-          "\nDistance: " +
-          mapLocation.distance
-      );
+      navigate("/StoreMap", {state: mapLocation});
     }
   };
-
-  */
 
   // Initializes mapLocation object with attributes that can be modified
   const mapLocation = {

@@ -1,13 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../index.css";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
+import { useLocation } from "react-router-dom";
 
 function StoreMap() {
-    const position = { lat: 47.487389, lng: -117.575762 };
+  // Used to retrieve data from previous page that navigated to current page
+  const location = useLocation();
 
+  /*
+    Values that the user has entered into the fields from the Location page can be retrieved with the following:
+        - Location Value: location.state.location
+        - Distance Value: location.state.distance   
+  */
+
+  // Sets default location to be Cheney WA
+  const [storeMapLatitude, setStoreMapLatitude] = React.useState(47.487389);
+  const [storeMapLongitude, setStoreMapLongitude] = React.useState(-117.575762);
+
+  // If the state is not null (User has navigated to StoreMap page from Location page with Location and Distance inputs)
+  if (location.state) {
+    // Geocode the address
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode(
+      {
+        address: location.state.location,
+      },
+      function (results) {
+        // Set the latitude and longitude values
+        setStoreMapLatitude(results[0].geometry.location.lat());
+        setStoreMapLongitude(results[0].geometry.location.lng());
+      }
+    );
+  }
+
+  const position = { lat: storeMapLatitude, lng: storeMapLongitude };
+
+  /*
     useEffect(() => {
         const initializeMap = () => {
 
@@ -54,30 +85,31 @@ function StoreMap() {
 
         initializeMap(); // Call the initialization function when component mounts
     }, []);
+    */
 
-    return (
-        <div>
-            <NavBar />
-            <div className="map-page-container">
-                <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-                    <div className="map-container">
-                        <Map zoom={15} center={position}></Map>
-                    </div>
-                </APIProvider>
-                <div className="store-container no-scrollbar">
-                    <div className="store-card-container">
-                        <StoreCard />
-                        <StoreCard />
-                        <StoreCard />
-                        <StoreCard />
-                        <StoreCard />
-                        <StoreCard />
-                        <StoreCard />
-                    </div>
-                </div>
-            </div>
+  return (
+    <div>
+      <NavBar />
+      <div className="map-page-container">
+        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+          <div className="map-container">
+            <Map zoom={15} center={position}></Map>
+          </div>
+        </APIProvider>
+        <div className="store-container no-scrollbar">
+          <div className="store-card-container">
+            <StoreCard />
+            <StoreCard />
+            <StoreCard />
+            <StoreCard />
+            <StoreCard />
+            <StoreCard />
+            <StoreCard />
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default StoreMap;

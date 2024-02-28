@@ -105,7 +105,11 @@ export default function PlacesAutocomplete(props) {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
-        props.changeLocationValue(newValue.description);
+        if(!newValue) {
+          props.changeLocationValue("");
+        } else {
+          props.changeLocationValue(newValue.description);
+        }
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
