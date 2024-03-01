@@ -12,7 +12,7 @@ const itemResponse = () => {
   useEffect( () => {
     const fetchData = async () => {
       try {
-        const response = await ItemsApi.get("/");
+        const response = await ItemsApi.get("http://localhost:5555/groceryApp/store/item/product");
         console.log(response);
   
       }catch (err){}
