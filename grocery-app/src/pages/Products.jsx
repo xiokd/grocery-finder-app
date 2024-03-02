@@ -5,8 +5,10 @@ import ItemsApi from "../apis/ItemsApi";
 import ProductStoreGrid from "../components/ProductStoreGrid";
 
 import NavBar from "../components/NavBar";
+import FetchData from "../../FetchData";
 
 //below is help on getting start
+
 const itemResponse = () => {
   
   useEffect( () => {
@@ -27,7 +29,7 @@ function Products() {
     <div>
       <div>
         <NavBar/>
-        <ProductStoreGrid/>
+        <FetchData/>
       </div>
     </div>
   );
