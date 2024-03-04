@@ -3,9 +3,9 @@ import "../index.css";
 //api to access index.js
 import ItemsApi from "../apis/ItemsApi";
 import ProductStoreGrid from "../components/ProductStoreGrid";
+import FetchData from "../../FetchData";
 
 import NavBar from "../components/NavBar";
-import FetchData from "../../FetchData";
 
 //below is help on getting start
 
@@ -15,7 +15,7 @@ const itemResponse = () => {
     const fetchData = async () => {
       try {
         const response = await ItemsApi.get("http://localhost:5555/groceryApp/store/item/product");
-        console.log(response);
+        return response;
   
       }catch (err){}
     };
@@ -29,7 +29,7 @@ function Products() {
     <div>
       <div>
         <NavBar/>
-        <FetchData/>
+        <ProductStoreGrid/>
       </div>
     </div>
   );

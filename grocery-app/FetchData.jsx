@@ -1,4 +1,6 @@
 import React from 'react'
+import  useEffect  from 'react'
+import  useState  from 'react'
 
 function FetchData() {
     const [records, setRecords] = useState([])
@@ -14,7 +16,7 @@ function FetchData() {
         <div>
             <ul>
                 {records.map((list, index)=> (
-                    <li key={index}>{list.id} | {list.name}</li>
+                    <li key={index}>{list.product_upc} | {list.product_name}</li>
                 ))}
             </ul>
         </div>

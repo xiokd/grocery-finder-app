@@ -49,28 +49,7 @@ const rows = [
     storeName: "Store 1",
     product: "Placeholder French Bread",
     price: 1.47,
-  },
-  {
-    id: 2,
-    productImage: placeholdermilk,
-    storeName: "Store 1",
-    product: "Placeholder Milk",
-    price: 4.34,
-  },
-  {
-    id: 3,
-    productImage: placeholdercereal,
-    storeName: "Store 2",
-    product: "Placeholder Cereal",
-    price: 3.27,
-  },
-  {
-    id: 4,
-    productImage: placeholdercoffee,
-    storeName: "Store 3",
-    product: "Placeholder Coffee",
-    price: 16.90,
-  },
+  }
 ];
 
 /*
