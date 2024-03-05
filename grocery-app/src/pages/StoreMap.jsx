@@ -5,6 +5,7 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
 import { useLocation } from "react-router-dom";
+import { Box, Button } from "@mui/material";
 
 function StoreMap() {
   // Used to retrieve data from previous page that navigated to current page
@@ -90,21 +91,30 @@ function StoreMap() {
   return (
     <div>
       <NavBar />
-      <div className="map-page-container">
-        <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-          <div className="map-container">
-            <Map zoom={15} center={position}></Map>
-          </div>
-        </APIProvider>
-        <div className="store-container no-scrollbar">
-          <div className="store-card-container">
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
-            <StoreCard />
+      <div className="map-page-content">
+        <div className="map-page-container">
+          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+            <div className="map-container">
+              <Map zoom={15} center={position}></Map>
+            </div>
+          </APIProvider>
+          <div className="map-page-store-container">
+            <div className="store-container no-scrollbar">
+              <div className="store-card-container">
+                <StoreCard />
+                <StoreCard />
+                <StoreCard />
+                <StoreCard />
+                <StoreCard />
+                <StoreCard />
+                <StoreCard />
+              </div>
+            </div>
+            <div>
+              <Button variant="contained" sx={{ width: "100%" }}>
+                Select Stores
+              </Button>
+            </div>
           </div>
         </div>
       </div>
