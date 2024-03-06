@@ -101,7 +101,7 @@ function ProductStoreGrid() {
         disableRowSelectionOnClick
       />
       <div className="list-button-section">
-        <Button variant="contained">Delete</Button>
+        <Button variant="contained">Select</Button>
       </div>
     </Box>
   );

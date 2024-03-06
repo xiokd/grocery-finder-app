@@ -4,7 +4,7 @@ import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 import NavBar from "../components/NavBar";
 import StoreCard from "../components/StoreCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Box, Button } from "@mui/material";
 
 function StoreMap() {
@@ -38,6 +38,11 @@ function StoreMap() {
   }
 
   const position = { lat: storeMapLatitude, lng: storeMapLongitude };
+
+  const navigate = useNavigate();
+  const redirectToProduct = () => {
+    navigate("/Products");
+  }
 
   /*
     useEffect(() => {
@@ -111,7 +116,7 @@ function StoreMap() {
               </div>
             </div>
             <div>
-              <Button variant="contained" sx={{ width: "100%" }}>
+              <Button variant="contained" sx={{ width: "100%" }} onClick={redirectToProduct}>
                 Select Stores
               </Button>
             </div>
