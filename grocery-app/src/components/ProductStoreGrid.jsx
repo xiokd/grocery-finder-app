@@ -1,9 +1,8 @@
-import React, {useEffect} from "react";
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useContext } from "react";
 import StoreAPI from "../apis/StoreAPI";
 import { StoreContext } from "../context/StoreContext";
-import "../index.css";
+import { useNavigate } from 'react-router-dom';
+//import "../index.css";
 
 const ProductStoreGrid = (props) =>
   {
@@ -49,7 +48,7 @@ const ProductStoreGrid = (props) =>
             </tr>
           </thead>
           <tbody>
-            {/* {store && store.map(store => {
+            {store && store.map(store => {
               return(
                 <tr key = {store.id}>
                   <td>{store.productImage}</td>
@@ -59,7 +58,7 @@ const ProductStoreGrid = (props) =>
                   <td><button onClick={() => handleAdd(store.id)} classname="btn btn-primary">Add Product</button></td>
                 </tr>
               )
-            })} */}
+            })}
           </tbody>
         </table>
       </div>
