@@ -29,7 +29,7 @@ function Products() {
     <div>
       <div>
         <NavBar/>
-        <ProductStoreGrid/>
+        <FetchData/>
       </div>
     </div>
   );

@@ -62,7 +62,7 @@ Tasks:
 - Current static placeholder data will be replaced with data that appears in the database.
 */
 
-function ProductStoreGrid() {
+/*function ProductStoreGrid() {
   return (
     <Box sx={{ height: 400, width: "99%" }}>
       <DataGrid
@@ -84,6 +84,12 @@ function ProductStoreGrid() {
       </div>
     </Box>
   );
+}*/
+
+
+const ProductStoreGrid = (props) =>
+{
+  const {products, setProducts} = useContext(ProductsContext);
 }
 
 export default ProductStoreGrid;
