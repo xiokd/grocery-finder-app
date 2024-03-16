@@ -6,10 +6,11 @@ import ProductStoreGrid from "../components/ProductStoreGrid";
 
 import NavBar from "../components/NavBar";
 import { StoreContext } from "../context/StoreContext";
+//import 'bootstrap/dist/css/bootstrap.min.css'
 
 //below is help on getting start
 
-const itemResponse = (props) => {
+/*const itemResponse = (props) => {
   const{stores, setStores} = useContext(StoreContext)
   useEffect( () => {
     const fetchData = async () => {
@@ -22,14 +23,14 @@ const itemResponse = (props) => {
     };
     fetchData();
   }, []);
-}
+}*/
 
 function Products() {
   return (
     <div>
       <div>
         <NavBar/>
-        <FetchData/>
+        <ProductStoreGrid/>
       </div>
     </div>
   );

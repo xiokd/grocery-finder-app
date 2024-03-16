@@ -1,15 +1,75 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import StoreAPI from "../apis/StoreAPI";
+import { StoreContext } from "../context/StoreContext";
 import "../index.css";
-import { Box, Avatar, Button } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
 
-// Temporary: Imports for placeholder images
-import placeholdermilk from "../images/placeholder/placeholdermilk.png";
-import placeholdercoffee from "../images/placeholder/placeholdercoffee.png";
-import placeholdercereal from "../images/placeholder/placeholdercereal.png";
-import placeholderbread from "../images/placeholder/placeholderbread.png";
+const ProductStoreGrid = (props) =>
+  {
+    
+    const {store, setStore} = useContext(StoreContext);
+    let navigate = useNavigate();
+    useEffect(() => 
+    {
+      const fetchData = () =>
+      {
+        (async () =>
+        {
+          try
+          {
+            const response = await StoreAPI.get("/");
+            console.log(response);
+          }
+          catch(error)
+          {
+            console.log(error);
+          }
+        })
+      }
+      fetchData();
+    },[]);
+  
+    const handleAdd = (id) =>
+    {
+      
+    }
+  
+    //Just going to use bootstrap for this part
+    return(
+      <div className="list-group">
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr className="bg-primary">
+              <th scope='col'>ID</th>
+              <th scope='col'>Picture</th>
+              <th scope='col'>Product</th>
+              <th scope='col'>Store</th>
+              <th scope='col'>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* {store && store.map(store => {
+              return(
+                <tr key = {store.id}>
+                  <td>{store.productImage}</td>
+                  <td>{store.product}</td>
+                  <td>{store.storeName}</td>
+                  <td>{store.price}</td>
+                  <td><button onClick={() => handleAdd(store.id)} classname="btn btn-primary">Add Product</button></td>
+                </tr>
+              )
+            })} */}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+  
+  export default ProductStoreGrid;
 
 // Sets Column values and labels for the Data Grid component 
+/*
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -83,13 +143,8 @@ Tasks:
         <Button variant="contained">Delete</Button>
       </div>
     </Box>
-  );
-}*/
+    );
+  }*/
+  
 
-
-const ProductStoreGrid = (props) =>
-{
-  const {products, setProducts} = useContext(ProductsContext);
-}
-
-export default ProductStoreGrid;
+  

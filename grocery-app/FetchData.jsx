@@ -1,4 +1,4 @@
-import React from 'react'
+/*import React from 'react'
 import  useEffect  from 'react'
 import  useState  from 'react'
 
@@ -23,4 +23,4 @@ function FetchData() {
     )
 }
 
-export default FetchData
+export default FetchData*/
