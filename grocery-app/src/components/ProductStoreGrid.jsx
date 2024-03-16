@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import StoreAPI from "../apis/StoreAPI";
+import ItemsAPI from "../apis/ItemsApi";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from 'react-router-dom';
 //import "../index.css";
@@ -17,8 +17,8 @@ const ProductStoreGrid = (props) =>
         {
           try
           {
-            const response = await StoreAPI.get("/");
-            console.log(response);
+            const response = await ItemsAPI.get("/");
+            setStore(response.data.store);
           }
           catch(error)
           {
@@ -50,11 +50,11 @@ const ProductStoreGrid = (props) =>
           <tbody>
             {store && store.map(store => {
               return(
-                <tr key = {store.id}>
-                  <td>{store.productImage}</td>
-                  <td>{store.product}</td>
-                  <td>{store.storeName}</td>
-                  <td>{store.price}</td>
+                <tr key = {store.product_upc}>
+                  <td>{store.product_url}</td>
+                  <td>{store.product_name}</td>
+                  <td>{store}</td>
+                  <td>{store.product_price}</td>
                   <td><button onClick={() => handleAdd(store.id)} classname="btn btn-primary">Add Product</button></td>
                 </tr>
               )
