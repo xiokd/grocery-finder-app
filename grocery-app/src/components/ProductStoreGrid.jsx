@@ -100,7 +100,7 @@ const ProductStoreGrid = (props) =>
                   <td>{store.store_name}</td>
                   <td>${store.product_price}</td>
                   <td>${priceByWeight.toFixed(2)} {displayWeight(store.product_weight)}</td>
-                  <td><button onClick={() => handleAdd(store.product_upc)} classname="btn btn-primary">Add Product</button></td>
+                  <td><button className="btn btn-primary" onClick={() => handleAdd(store.product_upc)} >Add Product</button></td>
                 </tr>
               )
             })}
