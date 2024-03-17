@@ -58,10 +58,37 @@ const ProductStoreGrid = (props) =>
               <th scope='col'>Product</th>
               <th scope='col'>Store</th>
               <th scope='col'>Price</th>
+              <th scope='col'>Price by weight</th>
+              <th scope='col'>Add Item</th>
             </tr>
           </thead>
           <tbody>
             {store && store.map && store.map(store => {
+              
+              const parseWeight = (weight) =>
+              {
+                const weightMatch = weight.match(/\d+(\.\d+)?/);
+                if(weightMatch)
+                {
+                  return parseFloat(weightMatch[0]);
+                }
+                return 1;
+              }
+          
+              const displayWeight = (weightType) =>
+              {
+                if(weightType.toLowerCase() === 'each')
+                {
+                  return 'each';
+                }
+                else
+                {
+                  return `per ${weightType.split(/\d/).pop()}`;
+                }
+              }
+          
+              const priceByWeight = store.product_price / parseWeight(store.product_weight);
+
               return(
                 <tr key = {store.product_upc}>
                   <td><input type='checkbox' 
@@ -71,7 +98,8 @@ const ProductStoreGrid = (props) =>
                   <td><img src={store.product_url} alt='product' className="img-thumbnail" style={{width: "100px", height: "100px"}}/></td>
                   <td>{store.product_name}</td>
                   <td>{store.store_name}</td>
-                  <td>{store.product_price}</td>
+                  <td>${store.product_price}</td>
+                  <td>${priceByWeight.toFixed(2)} {displayWeight(store.product_weight)}</td>
                   <td><button onClick={() => handleAdd(store.product_upc)} classname="btn btn-primary">Add Product</button></td>
                 </tr>
               )
