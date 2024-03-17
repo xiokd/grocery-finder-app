@@ -68,7 +68,7 @@ const ProductStoreGrid = (props) =>
                   onChange={() => handleCheckboxChange(store.product_upc)}
                   checked={selectedProducts.includes(store.product_upc)}
                   /></td>
-                  <td>{store.product_url}</td>
+                  <td><img src={store.product_url} alt='product' className="img-thumbnail" style={{width: "100px", height: "100px"}}/></td>
                   <td>{store.product_name}</td>
                   <td>{store.store_name}</td>
                   <td>{store.product_price}</td>
