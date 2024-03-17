@@ -35,6 +35,8 @@ const ProductStoreGrid = (props) =>
       
     }
 
+    
+
     const handleCheckboxChange = (product_upc) =>
     {
       if(selectedProducts.includes(product_upc))
@@ -59,7 +61,7 @@ const ProductStoreGrid = (props) =>
               <th scope='col'>Store</th>
               <th scope='col'>Price</th>
               <th scope='col'>Price by weight</th>
-              <th scope='col'>Add Item</th>
+              <th scope='col'>Add to shopping list</th>
             </tr>
           </thead>
           <tbody>
@@ -100,7 +102,7 @@ const ProductStoreGrid = (props) =>
                   <td>{store.store_name}</td>
                   <td>${store.product_price}</td>
                   <td>${priceByWeight.toFixed(2)} {displayWeight(store.product_weight)}</td>
-                  <td><button className="btn btn-primary" onClick={() => handleAdd(store.product_upc)} >Add Product</button></td>
+                  <td><button className="btn btn-primary" onClick={() => handleAdd(store.product_upc)} >Add to shopping list</button></td>
                 </tr>
               )
             })}

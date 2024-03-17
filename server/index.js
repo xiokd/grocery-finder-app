@@ -30,6 +30,17 @@ app.get("/groceryApp/store/item/product", async (req, res) => { // http://localh
          console.error("product get error", err)
          }
  });
+ app.get("/groceryApp/store/item/product/:product_description")
+ {
+    try
+    {
+        
+    }
+    catch(error)
+    {
+        console.error("Item by product description search error:", error);
+    }
+ }
 //below are two options to get product type vs upc depends on handling requests comment one out for the proper result
 //get items by product_type
 app.get("/groceryApp/store/item/product/:product_type", async (req, res) => {
