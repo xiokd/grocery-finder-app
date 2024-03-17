@@ -1,12 +1,14 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import ItemsAPI from "../apis/ItemsApi";
 import { StoreContext } from "../context/StoreContext";
 import { useNavigate } from 'react-router-dom';
+import { Checkbox } from "@mui/material";
 //import "../index.css";
 
 const ProductStoreGrid = (props) =>
   {
     const {store, setStore} = useContext(StoreContext);
+    const [selectedProducts, setSelectedProducts] = useState([]);
     let navigate = useNavigate();
     useEffect(() => 
     {
@@ -28,10 +30,22 @@ const ProductStoreGrid = (props) =>
       fetchData();
     },[]);
   
-    const handleAdd = (id) =>
+    const handleAdd = (product_upc) =>
     {
       
     }
+
+    const handleCheckboxChange = (product_upc) =>
+    {
+      if(selectedProducts.includes(product_upc))
+      {
+        setSelectedProducts(selectedProducts.filter(id => id !== product_upc));
+      }
+      else
+      {
+        setSelectedProducts([...selectedProducts, product_upc]);
+      }
+    };
     
     //Just going to use bootstrap for this part
     return(
@@ -39,7 +53,7 @@ const ProductStoreGrid = (props) =>
         <table className="table table-striped table-hover">
           <thead>
             <tr className="bg-primary">
-              <th scope='col'>ID</th>
+              <th scope='col'>Select</th>
               <th scope='col'>Picture</th>
               <th scope='col'>Product</th>
               <th scope='col'>Store</th>
@@ -50,6 +64,10 @@ const ProductStoreGrid = (props) =>
             {store && store.map && store.map(store => {
               return(
                 <tr key = {store.product_upc}>
+                  <td><input type='checkbox' 
+                  onChange={() => handleCheckboxChange(store.product_upc)}
+                  checked={selectedProducts.includes(store.product_upc)}
+                  /></td>
                   <td>{store.product_url}</td>
                   <td>{store.product_name}</td>
                   <td>{store.store_name}</td>
