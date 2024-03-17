@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const ProductStoreGrid = (props) =>
   {
-    
     const {store, setStore} = useContext(StoreContext);
     let navigate = useNavigate();
     useEffect(() => 
@@ -18,13 +17,15 @@ const ProductStoreGrid = (props) =>
           try
           {
             const response = await ItemsAPI.get("/");
-            setStore(response.data.store);
+            console.log(response.data.data.store);
+            console.log(setStore);
+            setStore(response.data.data.store);
           }
           catch(error)
           {
-            console.log(error);
+            console.error(error);
           }
-        })
+        })();
       }
       fetchData();
     },[]);
@@ -33,7 +34,7 @@ const ProductStoreGrid = (props) =>
     {
       
     }
-  
+    
     //Just going to use bootstrap for this part
     return(
       <div className="list-group">
@@ -48,14 +49,14 @@ const ProductStoreGrid = (props) =>
             </tr>
           </thead>
           <tbody>
-            {store && store.map(store => {
+            {store && store.map && store.map(store => {
               return(
                 <tr key = {store.product_upc}>
                   <td>{store.product_url}</td>
                   <td>{store.product_name}</td>
                   <td>{store}</td>
                   <td>{store.product_price}</td>
-                  <td><button onClick={() => handleAdd(store.id)} classname="btn btn-primary">Add Product</button></td>
+                  <td><button onClick={() => handleAdd(store.product_upc)} classname="btn btn-primary">Add Product</button></td>
                 </tr>
               )
             })}
