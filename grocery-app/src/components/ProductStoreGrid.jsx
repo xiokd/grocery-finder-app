@@ -17,8 +17,6 @@ const ProductStoreGrid = (props) =>
           try
           {
             const response = await ItemsAPI.get("/");
-            console.log(response.data.data.store);
-            console.log(setStore);
             setStore(response.data.data.store);
           }
           catch(error)
@@ -54,7 +52,7 @@ const ProductStoreGrid = (props) =>
                 <tr key = {store.product_upc}>
                   <td>{store.product_url}</td>
                   <td>{store.product_name}</td>
-                  <td>{store}</td>
+                  <td>{store.store_name}</td>
                   <td>{store.product_price}</td>
                   <td><button onClick={() => handleAdd(store.product_upc)} classname="btn btn-primary">Add Product</button></td>
                 </tr>
