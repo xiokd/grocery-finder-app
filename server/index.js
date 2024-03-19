@@ -16,19 +16,31 @@ app.use(express.json());
 //get all items
 app.get("/groceryApp/store/item/product", async (req, res) => { // http://localhost:5555/groceryApp/store/item/product
     try{
-         const result = await pool.query("SELECT product_name, product_discription, product_type, product_weight, product_price, package_quantity, product_upc, product_url from store;");
-         console.log(result);
+         const result = await pool.query("SELECT * FROM store");//SELECT product_name, product_discription, product_type, product_weight, product_price, package_quantity, product_upc, product_url from store;");
+         console.log("Get all items results", result);
          res.status(200).json({
              status: 200,
-             store: "store1",
+             //store: "store1",
+             //results: result.row.length,
              data: {
                  store: result.rows,
              },
          });
      }catch (err){
-         console.log(err)
+         console.error("product get error", err)
          }
  });
+ app.get("/groceryApp/store/item/product/:product_description")
+ {
+    try
+    {
+        
+    }
+    catch(error)
+    {
+        console.error("Item by product description search error:", error);
+    }
+ }
 //below are two options to get product type vs upc depends on handling requests comment one out for the proper result
 //get items by product_type
 app.get("/groceryApp/store/item/product/:product_type", async (req, res) => {
@@ -74,5 +86,5 @@ app.get('/' , (req,res) => {
     res.send('Test Request: Success!'); 
 });
 app.listen(5555, () => {
-    console.log("Index Server is starting on port 5555");
+    console.log("Index Server is starting on port 5555 successful");
 });
