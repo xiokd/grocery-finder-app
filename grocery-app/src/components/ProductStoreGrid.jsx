@@ -1,15 +1,121 @@
-import React from "react";
-import "../index.css";
-import { Box, Avatar, Button } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
+import React, { useEffect, useContext, useState } from "react";
+import ItemsAPI from "../apis/ItemsApi";
+import { StoreContext } from "../context/StoreContext";
+import { useNavigate } from 'react-router-dom';
+import { Checkbox } from "@mui/material";
+//import "../index.css";
 
-// Temporary: Imports for placeholder images
-import placeholdermilk from "../images/placeholder/placeholdermilk.png";
-import placeholdercoffee from "../images/placeholder/placeholdercoffee.png";
-import placeholdercereal from "../images/placeholder/placeholdercereal.png";
-import placeholderbread from "../images/placeholder/placeholderbread.png";
+const ProductStoreGrid = (props) =>
+  {
+    const {store, setStore} = useContext(StoreContext);
+    const [selectedProducts, setSelectedProducts] = useState([]);
+    let navigate = useNavigate();
+    useEffect(() => 
+    {
+      const fetchData = () =>
+      {
+        (async () =>
+        {
+          try
+          {
+            const response = await ItemsAPI.get("/");
+            setStore(response.data.data.store);
+          }
+          catch(error)
+          {
+            console.error(error);
+          }
+        })();
+      }
+      fetchData();
+    },[]);
+  
+    const handleAdd = (product_upc) =>
+    {
+      
+    }
+
+    
+
+    const handleCheckboxChange = (product_upc) =>
+    {
+      if(selectedProducts.includes(product_upc))
+      {
+        setSelectedProducts(selectedProducts.filter(id => id !== product_upc));
+      }
+      else
+      {
+        setSelectedProducts([...selectedProducts, product_upc]);
+      }
+    };
+    
+    //Just going to use bootstrap for this part
+    return(
+      <div className="list-group">
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr className="bg-primary">
+              <th scope='col'>Select</th>
+              <th scope='col'>Picture</th>
+              <th scope='col'>Product</th>
+              <th scope='col'>Store</th>
+              <th scope='col'>Price</th>
+              <th scope='col'>Price by weight</th>
+              <th scope='col'>Add to shopping list</th>
+            </tr>
+          </thead>
+          <tbody>
+            {store && store.map && store.map(store => {
+              
+              const parseWeight = (weight) =>
+              {
+                const weightMatch = weight.match(/\d+(\.\d+)?/);
+                if(weightMatch)
+                {
+                  return parseFloat(weightMatch[0]);
+                }
+                return 1;
+              }
+          
+              const displayWeight = (weightType) =>
+              {
+                if(weightType.toLowerCase() === 'each')
+                {
+                  return 'each';
+                }
+                else
+                {
+                  return `per ${weightType.split(/\d/).pop()}`;
+                }
+              }
+          
+              const priceByWeight = store.product_price / parseWeight(store.product_weight);
+
+              return(
+                <tr key = {store.product_upc}>
+                  <td><input type='checkbox' 
+                  onChange={() => handleCheckboxChange(store.product_upc)}
+                  checked={selectedProducts.includes(store.product_upc)}
+                  /></td>
+                  <td><img src={store.product_url} alt='product' className="img-thumbnail" style={{width: "100px", height: "100px"}}/></td>
+                  <td>{store.product_name}</td>
+                  <td>{store.store_name}</td>
+                  <td>${store.product_price}</td>
+                  <td>${priceByWeight.toFixed(2)} {displayWeight(store.product_weight)}</td>
+                  <td><button className="btn btn-primary" onClick={() => handleAdd(store.product_upc)} >Add to shopping list</button></td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+  
+  export default ProductStoreGrid;
 
 // Sets Column values and labels for the Data Grid component 
+/*
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
   {
@@ -49,28 +155,7 @@ const rows = [
     storeName: "Store 1",
     product: "Placeholder French Bread",
     price: 1.47,
-  },
-  {
-    id: 2,
-    productImage: placeholdermilk,
-    storeName: "Store 1",
-    product: "Placeholder Milk",
-    price: 4.34,
-  },
-  {
-    id: 3,
-    productImage: placeholdercereal,
-    storeName: "Store 2",
-    product: "Placeholder Cereal",
-    price: 3.27,
-  },
-  {
-    id: 4,
-    productImage: placeholdercoffee,
-    storeName: "Store 3",
-    product: "Placeholder Coffee",
-    price: 16.90,
-  },
+  }
 ];
 
 /*
@@ -83,7 +168,7 @@ Tasks:
 - Current static placeholder data will be replaced with data that appears in the database.
 */
 
-function ProductStoreGrid() {
+/*function ProductStoreGrid() {
   return (
     <Box sx={{ height: 400, width: "99%" }}>
       <DataGrid
@@ -104,7 +189,8 @@ function ProductStoreGrid() {
         <Button variant="contained">Delete</Button>
       </div>
     </Box>
-  );
-}
+    );
+  }*/
+  
 
-export default ProductStoreGrid;
+  

@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const app = express();
 const port_no = 5555;
 const cors = require('cors');
@@ -121,6 +121,7 @@ app.get("/groceryApp/store/item/product/:product_upc", async (req, res) => {
     }
 });*/
 // Simple GET request test using root '/' as a route
+/*
 app.get('/' , (req,res) => { 
     res.send('Test Request: Success!'); 
 });
@@ -128,4 +129,4 @@ app.get('/' , (req,res) => {
 // Server Setup 
 app.listen(port_no, () => { 
     console.log('Server is starting on port 5555'); 
-});
+});*/
